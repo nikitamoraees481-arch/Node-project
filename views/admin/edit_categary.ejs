@@ -1,0 +1,15 @@
+<div class="contener-flued bg-white p-4">
+    <h1>Update Categary</h1>
+    <form action="/admin/update_categary" method="post">
+    <div class="row">
+        <div class="col-md-9 mt-4">
+            <input type="hidden" name="categary_id" value="<%=edit_categary[0].categary_id%>">
+        Update Categary Name
+         <input type="text" class="form-control"value="<%=edit_categary[0].categary_name%>" name="categary_name"><br><br>
+        </div>
+        <div class="col-md-3 mt-5 text-center">
+         <Button class="btn btn-primary">Update Categary</Button>
+        </div>
+    </div>
+    </form>
+</div>

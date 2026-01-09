@@ -1,0 +1,33 @@
+<%- include("navbar.ejs") %>
+<div class="container-fliud bg-white p-4">
+    <h1><%=status%> List</h1>
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Action</th>
+                    <th>Sr.No</th>
+                    <th>customer Name</th>
+                    <th>customer Mobile</th>
+                    <th>Address</th>
+                    <th>Amount</th>
+                </tr>
+
+                <% orders.map(function(val,i) { %>
+                    <tr>
+                        <td>
+                        <a href="/admin/order_info/<%=val.order_id%>" class="btn btn-primary">Details</a href="/admin/order_info/<%=val.order_id%>">
+                        </td>
+                        <td><%=i+1%></td>
+                        <td><%=val.customer_name%></td>
+                        <td><%=val.customer_mobile%></td>
+                        <td><%=val.landmark%> ,<%=val.area%> ,<%=val.city%> ,<%=val.District%> ,<%=val.customer_state%> ,<%=val.pincode%></td>
+                        <td><%=val.order_amount%> - <%=val.payment_type%></td>
+                    </tr>
+                <% }) %>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

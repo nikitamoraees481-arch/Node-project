@@ -1,0 +1,133 @@
+<%-include("navbar.ejs")%>
+
+<div class="container mt-5 mb-5 bg-white p-4 shadow-sm rounded">
+
+    <div class="row">
+
+        <!-- LEFT: IMAGES -->
+        <div class="col-md-5">
+
+            <img id="main_image" src="/upload/<%=product_info[0].product_image1%>"
+                 class="img-fluid border rounded main-img" style="height: 70%; width: 100%;" id="main_image">
+            <br><br>
+            <div class="d-flex gap-2 mt-3">
+                <img onclick="main_image.src=this.src" src="/upload/<%=product_info[0].product_image1%>" class="thumb-img" height="100px" width="115px">
+                <img onclick="main_image.src=this.src" src="/upload/<%=product_info[0].product_image2%>" class="thumb-img" height="100px" width="115px">
+                <img onclick="main_image.src=this.src" src="/upload/<%=product_info[0].product_image3%>" class="thumb-img" height="100px" width="115px">
+                <img onclick="main_image.src=this.src" src="/upload/<%=product_info[0].product_image4%>" class="thumb-img" height="100px" width="115px">
+            </div>
+
+        </div>
+
+        <!-- RIGHT: PRODUCT DETAILS -->
+        <div class="col-md-7">
+
+            <h2 class="fw-bold"><%=product_info[0].product_name%></h2>
+
+            <p class="text-muted mb-1">Brand: <b><%=product_info[0].product_company%></b></p>
+            <p class="text-muted mb-3">Color: <b><%=product_info[0].product_color%></b></p>
+
+            <!-- PRICE -->
+            <h3 class="text-danger fw-bold">
+                ₹<span id="price">0000/-</span>
+                <small class="text-muted" style="font-size:18px;">
+                    <del>₹<span id="Dprice">0000</span></del>
+                </small>
+                <!-- <span class="badge bg-success" id="offer_percent"></span> -->
+                   <span id="offer_percent" class="offer-badge"></span>
+            </h3>
+
+            <!-- <h3 id="price">0000</h3> -->
+
+            <!-- SIZE -->
+
+            <span class="mt-4">Select Size:</span><br>
+            <%price.map(function(val,i){%>
+                <% if(val.product_price > 0){ %>
+                
+                <div style="display: inline-block;" class="box">
+                    <button  class="btn_size btn btn-onclick-dark"onclick="updatePrices('<%=val.product_price%>',
+                     '<%=val.dublicate_price%>','<%=val.product_pricing_id%>')" style="margin-right:6px;"><%=val.product_size%></button>
+                </div>
+
+                <% } %>
+
+            <%})%>
+
+            <!-- DETAILS -->
+            <div class="mt-4">
+                <h5>Description</h5>
+                <div><%=product_info[0].product_detailes%></div>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="mt-4">
+                <button onclick="add_to_cart()"> Add to Cart <i class="fa-solid fa-cart-arrow-down" style="color: green;"></i></button>
+                <button class="btn btn-success btn-lg ms-2">⚡ Buy Now</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .offer-badge {
+        font-size: 15px;
+        color: green;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+    .btn_size {
+    background-color: #f0f0f0;
+    color: black;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.btn_size:hover {
+    background-color: #e0e0e0;
+}
+
+.btn_size.active {
+    background-color: #333 !important;
+    color: #fff !important;
+}
+
+
+</style>
+
+<script>
+    var active_product_pricing_id = '';
+    function updatePrices(price, d_price,product_pricing_id) {
+        active_product_pricing_id = product_pricing_id;
+
+    // PRICE UPDATE
+    document.getElementById("price").innerHTML = price;
+    document.getElementById("Dprice").innerHTML = d_price;
+
+    // auto discount percent
+    let percent = Math.round(((d_price - price) / d_price) * 100);
+    document.getElementById("offer_percent").innerHTML = percent + "% OFF";
+
+
+    // BUTTON ACTIVE MANAGEMENT
+    const allButtons = document.querySelectorAll('.btn_size');
+
+    // सर्व बटणांची active class काढा
+    allButtons.forEach(btn => btn.classList.remove('active'));
+
+    // क्लिक केलेल्या बटणावर active class लावा
+    event.target.classList.add('active');
+}
+
+function add_to_cart(){
+
+    var url = '/add_to_cart/<%=product_info[0].product_id%>/'+active_product_pricing_id;
+    location.href=url;
+}
+</script>
+
+<%-include("footer.ejs")%>

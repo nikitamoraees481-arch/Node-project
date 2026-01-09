@@ -1,0 +1,59 @@
+<%- include("navbar.ejs") %>
+
+<div class="container-fluid bg-white p-3">
+    <h1>About Company</h1>
+
+    <form action="/admin/about_company" method="post">
+        <div class="row">
+
+            <div class="col-md-4 mt-4">
+                <label>Company Name</label>
+                <input type="text" class="form-control" value="<%=about_company[0].company_name%>" name="company_name">
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <label>Company Mobile</label>
+                <input type="number" class="form-control" value="<%=about_company[0].company_mobile%>" name="company_mobile">
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <label>Company Email</label>
+                <input type="email" class="form-control"value="<%=about_company[0].company_email%>" name="company_email">
+            </div> 
+
+            <div class="col-md-12 mt-4">
+                <label>Company Address</label>
+                <textarea class="form-control" name="company_address"><%=about_company[0].company_address%></textarea>
+            </div>
+
+            <div class="col-md-3 mt-4">
+                <label>WhatsApp Number</label>
+                <input type="number" class="form-control"value="<%=about_company[0].company_what%>" name="company_what">
+            </div>
+
+            <div class="col-md-3 mt-4">
+                <label>Company YouTube</label>
+                <input type="text" class="form-control"value="<%=about_company[0].youtube%>" name="youtube">
+            </div>
+
+            <div class="col-md-3 mt-4">
+                <label>Company Instagram</label>
+                <input type="text" class="form-control"value="<%=about_company[0].insta%>" name="insta">
+            </div>
+
+            <div class="col-md-3 mt-4">
+                <label>Company Telegram</label>
+                <input type="text" class="form-control"value="<%=about_company[0].telegram%>" name="telegram">
+            </div>
+
+            <div class="col-md-12 text-center mt-5">
+                <button class="btn btn-primary" type="submit">
+                    Save Company
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<%- include("footer.ejs") %>

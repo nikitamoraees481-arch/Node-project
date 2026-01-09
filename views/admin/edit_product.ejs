@@ -1,0 +1,78 @@
+
+<%- include("navbar.ejs") %>
+
+<div class="container py-4">
+    <h1>UPDATE PRODUCT</h1>
+    <form action="/admin/update_product" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6 mt-3">
+                    <input type="hidden" name="product_id" value="<%=edit_product[0].product_id%>">
+                    Product Name <d class="text-danger">*</d>
+                    <input type="text" class="form-control" value="<%=edit_product[0].product_name%>" name="product_name" >
+                    
+                </div>
+                <div class="col-md-6 mt-3">
+                    Product Company <d class="text-danger">*</d>
+                    <input type="text"list="data" class="form-control" value="<%=edit_product[0].product_company%>" name="product_company">
+                    <datalist id="data">
+                        <option value="Nike">
+                        <option value="Adidas">
+                        <option value="Puma">
+                        <option value="Spike">
+                        <option value="Bata">
+                    </datalist>
+                </div>
+                <div class="col-md-6 mt-3">
+                    Color <d class="text-danger">*</d>
+                    <input type="text" class="form-control" value="<%=edit_product[0].product_color%>" name="product_color">
+                </div>
+                <div class="col-md-6 mt-3">
+                    Product Lable <d class="text-danger">*</d>
+                    <!-- <input type="text" class="form-control" name="product_lable"> -->
+                     <select  value="<%=edit_product[0].product_lable%>" class="form-control" name="product_lable" id="">
+                        <option >Select product lable</option>
+                        <option value="featured">featured</option>
+                        <option value="best_silling">best_silling</option>
+                        <option value="flash0">flash</option>
+                     </select>
+                </div>
+                <div class="col-md-6 mt-3">
+                    image 1 <d class="text-danger">*</d>
+                    <img src="/upload/<%=edit_product[0].product_image1 %>" height="100px" width="200px"><br><br>
+                    <input type="file" class="form-control" name="product_image1">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-5">
+            <table class="table table-sm table-striped table-bordered">
+                <tr>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>dub Price</th>
+                </tr>
+                <%
+                var size=["XS","S","M","L","XL","XXL"];
+                for(var i=0; i<size.length; i++) { %>
+                <tr>
+                    <td><input type="text" name="product_size" value="<%=size[i]%>" class="form-control"></td>
+                    <td><input type="text" name="product_price" value="<%=edit_product_price[i].product_price%>" class="form-control"></td>
+                    <td><input type="text" name="dublicate_price" value="<%=edit_product_price[i].dublicate_price%>"class="form-control"></td> 
+                </tr>
+                    <% } %>
+            </table>
+        </div>
+        <div class="col-md-12 mt-2">
+            Detailes
+            <textarea class="form-control editor" name="product_detailes" id=""><%=edit_product[0].product_detailes%></textarea>
+        </div>
+        <div class="col-md-12 text-center mt-4">
+            <button type="submit" class="btn btn-primary">Update Product</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+<%- include("footer.ejs") %>
